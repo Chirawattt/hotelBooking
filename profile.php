@@ -3,7 +3,7 @@
     session_start();
     require 'config/database.php';
     // get all phone number except current user
-    $sql = "SELECT phone FROM user WHERE email != '{$_SESSION['user'][0]['email']}'";
+    $sql = "SELECT phone FROM user WHERE email != '{$_SESSION['user']['email']}'";
     $result = mysqli_query($conn, $sql);
     $phones = [];
     while ($phone = mysqli_fetch_array($result)) {
@@ -26,20 +26,21 @@
     <?php include './includes/navbar.php'; ?>
     <!-- form -->
     <div class="flex items-center justify-center mt-5">
-        <form action="../phpActions/profileCheck.php" method="post" class="w-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form action="phpActions/profileCheck.php" method="post" enctype="multipart/form-data" class="w-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-normal mb-2" for="email">
                     อีเมล
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none 
-                focus:shadow-outline bg-gray-200" name="email" id="email" type="email" placeholder="อีเมล" value="<?php echo $_SESSION['user'][0]['email']; ?>" disabled>
+                focus:shadow-outline bg-gray-200" name="email" id="email" type="email" placeholder="อีเมล" value="<?php echo $_SESSION['user']['email']; ?>" disabled> 
+                <!-- disabled will not send the value to the action path when submit -->
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-normal mb-2" for="password">
                     รหัสผ่าน
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none 
-                focus:shadow-outline bg-gray-200" name="password" id="password" type="text" placeholder="รหัสผ่าน" value="<?php echo $_SESSION['user'][0]['password']; ?>" disabled>
+                focus:shadow-outline bg-gray-200" name="password" id="password" type="text" placeholder="รหัสผ่าน" value="<?php echo $_SESSION['user']['password']; ?>" disabled>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-normal mb-2" for="phone">
@@ -48,7 +49,7 @@
                 <!-- div to group input and button checkValidPhone -->
                 <div class="flex gap-2">
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none 
-                    focus:shadow-outline bg-gray-200" name="phone" id="phone" type="phone" placeholder="หมายเลขโทรศัพท์" value="<?php echo $_SESSION['user'][0]['phone']; ?>" disabled>
+                    focus:shadow-outline bg-gray-200" name="phone" id="phone" type="phone" placeholder="หมายเลขโทรศัพท์" value="<?php echo $_SESSION['user']['phone']; ?>" disabled>
                     <button type="button" id="checkPhoneBtn" class="flex items-center text-white rounded-lg hover:bg-gray-100 bg-gray-300 
                         hover:text-amber-400 transition-all duration-300 ease-in-out justify-center group" onclick="checkValidPhone()" disabled>
                         <span class="text-sm">ตรวจสอบ</span>
@@ -61,26 +62,26 @@
                     ชื่อจริง
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none 
-                focus:shadow-outline" name="fname" id="fname" type="text" placeholder="ชื่อจริง" value="<?php echo $_SESSION['user'][0]['fname']; ?>">
+                focus:shadow-outline" name="fname" id="fname" type="text" placeholder="ชื่อจริง" value="<?php echo $_SESSION['user']['fname']; ?>">
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-normal mb-2" for="lname">
                     นามสกุล
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none 
-                focus:shadow-outline" name="lname" id="lname" type="text" placeholder="นามสกุล" value="<?php echo $_SESSION['user'][0]['lname']; ?>">
+                focus:shadow-outline" name="lname" id="lname" type="text" placeholder="นามสกุล" value="<?php echo $_SESSION['user']['lname']; ?>">
             </div>
             <!-- insert image file -->
-            <?php $userImg = $_SESSION['user'][0]['img'] == null ? "" : $_SESSION['user'][0]['img'];  ?>
+            <?php $userImg = $_SESSION['user']['img'] == null ? "" : $_SESSION['user']['img'];  ?>
             <div class="mb-4 relative">
                 <label class="block text-gray-700 text-sm font-normal mb-2" for="image">
                     รูปภาพ
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none 
-                focus:shadow-outline" name="image" id="image" type="file" placeholder="รูปภาพ">
+                focus:shadow-outline" name="imageFile" id="imageFile" type="file">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2 justify-between items-center">
-                        <span class="absolute top-1 right-0 text-gray-500">นามสกุล .jpg, .png .gif เท่านั้น</span>
+                        <span class="absolute top-1 right-0 text-gray-500">นามสกุล .jpg .png เท่านั้น</span>
                         <?php if ($userImg != ""){
                             echo "<img class='inline w-9 h-9 rounded-full' src='./assets/photos/$userImg' alt='user photo'>
                                     <span>$userImg</span>";
@@ -95,12 +96,13 @@
                 </div>
             </div>
             <div class="flex items-center justify-between">
-                <button type="submit" id="submitBtn" class="flex items-center p-2 text-red-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700
-                    hover:text-amber-400 transition-all duration-300 ease-in-out justify-center group" disabled>
-                    <!-- xmark icon -->
-                    <i id="submitIcon" class="fa-solid fa-xmark"></i>
-                    <span class="ms-3">อัพเดทข้อมูล</span>
-                </button>
+                <!-- button back to previous page -->
+                <a href="javascript:history.back()" class="flex items-center p-2 text-gray-500 rounded-lg bg-gray-300 hover:bg-red-600
+                    hover:text-white transition-all duration-300 ease-in-out justify-center group">
+                    <!-- back icon -->
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="ms-3">ย้อนกลับ</span>
+                </a>
                 <!-- button to enabled phone input -->
                 <button type="button" class="flex items-center p-2 text-gray-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700
                     hover:text-amber-400 transition-all duration-300 ease-in-out justify-center group" onclick="enablePhone()">
@@ -113,14 +115,13 @@
                     <i class="fa-solid fa-plus"></i>
                     <span class="ms-3">อัพเดทรหัสผ่าน</span>
                 </button>
-
-                <!-- button back to previous page -->
-                <a href="javascript:history.back()" class="flex items-center p-2 text-gray-500 rounded-lg bg-gray-300 hover:bg-red-600
-                    hover:text-white transition-all duration-300 ease-in-out justify-center group">
-                    <!-- back icon -->
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span class="ms-3">ย้อนกลับ</span>
-                </a>
+                <!-- submit button -->
+                <button type="submit" id="submitBtn" class="flex items-center p-2 text-red-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700
+                    hover:text-amber-400 transition-all duration-300 ease-in-out justify-center group" disabled>
+                    <!-- xmark icon -->
+                    <i id="submitIcon" class="fa-solid fa-xmark"></i>
+                    <span class="ms-3">อัพเดทข้อมูล</span>
+                </button>
             </div>
         </form>
     </div>
@@ -131,7 +132,7 @@
         document.getElementById('fname').addEventListener('input', function() {
             var submitBtn = document.getElementById('submitBtn');
             var submitIcon = document.getElementById('submitIcon');
-            if (this.value == "<?php echo $_SESSION['user'][0]['fname']; ?>") {
+            if (this.value == "<?php echo $_SESSION['user']['fname']; ?>") {
                 submitBtn.setAttribute('disabled', 'true');
                 submitBtn.classList.remove('text-green-600');
                 submitBtn.classList.add('text-red-500');
@@ -152,7 +153,7 @@
         document.getElementById('lname').addEventListener('input', function() {
             var submitBtn = document.getElementById('submitBtn');
             var submitIcon = document.getElementById('submitIcon');
-            if (this.value == "<?php echo $_SESSION['user'][0]['lname']; ?>") {
+            if (this.value == "<?php echo $_SESSION['user']['lname']; ?>") {
                 submitBtn.setAttribute('disabled', 'true');
                 submitBtn.classList.remove('text-green-600');
                 submitBtn.classList.add('text-red-500');
@@ -180,7 +181,7 @@
         document.getElementById('password').addEventListener('input', function() {
             var submitBtn = document.getElementById('submitBtn');
             var submitIcon = document.getElementById('submitIcon');
-            if (this.value == "<?php echo $_SESSION['user'][0]['password']; ?>") {
+            if (this.value == "<?php echo $_SESSION['user']['password']; ?>") {
                 submitBtn.setAttribute('disabled', 'true');
                 submitBtn.classList.remove('text-green-600');
                 submitBtn.classList.add('text-red-500');
@@ -222,7 +223,7 @@
                     // check if phone is number
                     if (!isNaN(phone)) {
                         // check if phone is same as before cancle button
-                        if (phone == "<?php echo $_SESSION['user'][0]['phone']; ?>") {
+                        if (phone == "<?php echo $_SESSION['user']['phone']; ?>") {
                             isSubmit = false;
                             alert('หมายเลขโทรศัพท์เหมือนเดิม');
                         } else if (!<?php echo json_encode($phones); ?>.includes(phone)) {
@@ -261,13 +262,13 @@
         }
 
         // detect if anything change in image input if same as before disable submit button else enable submit button
-        document.getElementById('image').addEventListener('change', function() {
+        document.getElementById('imageFile').addEventListener('change', function() {
             var submitBtn = document.getElementById('submitBtn');
             var submitIcon = document.getElementById('submitIcon');
             // remove C:\fakepath\ from image input
             console.log(this.value);
             let value = this.value.replace("C:\\fakepath\\", "");
-            if (value == "<?php echo $_SESSION['user'][0]['img']; ?>") {
+            if (value == "<?php echo $_SESSION['user']['img']; ?>") {
                 submitBtn.setAttribute('disabled', 'true');
                 submitBtn.classList.remove('text-green-600');
                 submitBtn.classList.add('text-red-500');
@@ -291,7 +292,7 @@
         });
 
         function clearImage() {
-            var image = document.getElementById('image');
+            var image = document.getElementById('imageFile');
             var submitBtn = document.getElementById('submitBtn');
             var submitIcon = document.getElementById('submitIcon');
             image.value = "";

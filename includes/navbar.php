@@ -31,7 +31,7 @@
 
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
-          <a href="index.php" class="flex items-center space-x-3 rtl:space-x-reverse ">
+          <a href="./index.php" class="flex items-center space-x-3 rtl:space-x-reverse ">
             <span class="self-center text-2xl font-semibold whitespace-nowrap text-white hover:text-amber-400 transition-all duration-300 ease-in-out">Hotels</span>
           </a>
           <div class="h-[80%] w-[3px] bg-white rounded-md ml-2"></div> <!-- Divider -->
@@ -67,8 +67,8 @@
               focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">Open user menu</span>
-              <?php if ($_SESSION['userImg'] !== null) {
-                  $userImg = $_SESSION['userImg'];
+              <?php if ($_SESSION['user']['img'] !== null) {
+                  $userImg = $_SESSION['user']['img'];
                   echo "<img class='w-9 h-9 rounded-full' src='./assets/photos/$userImg' alt='user photo'>";
               }else {
                   echo "<img class='w-9 h-9 rounded-full' src='./assets/photos/user.png' alt='user photo'>";
@@ -80,9 +80,9 @@
           ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" id="drop-down-memu">
             <!-- Active: "bg-gray-100", Not Active: "" -->
             <?php 
-              $email = $_SESSION['user'][0]['email'];
-              $fname = $_SESSION['user'][0]['fname'];
-              $lname = $_SESSION['user'][0]['lname'];
+              $email = $_SESSION['user']['email'];
+              $fname = $_SESSION['user']['fname'];
+              $lname = $_SESSION['user']['lname'];
             ?>
 
             <!-- display fname lname in div -->
@@ -90,7 +90,7 @@
               <div class="font-semibold"><?php echo $fname . ' ' . $lname; ?></div>
               <div class="text-xs text-gray-500"><?php echo $email; ?></div>
             </div>
-            <?php if ($_SESSION['user'][0]['role'] === 'admin') {
+            <?php if ($_SESSION['user']['role'] === 'admin') {
               echo "
                 <a href='./manageRoom.php' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white transition-all duration-300 ease-in-out' role='menuitem' tabindex='-1' id='user-menu-item-0'>จัดการห้องพัก</a>
                 <a href='#' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white transition-all duration-300 ease-in-out' role='menuitem' tabindex='-1' id='user-menu-item-1'>แดชบอร์ด</a>

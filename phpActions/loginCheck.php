@@ -1,6 +1,7 @@
 <?php
     session_start(); // Start the session and store the session data
     require "../config/database.php";
+    
 
     $email = $_POST['email'];
     $Password = $_POST['password'];
@@ -12,8 +13,7 @@
     $userData = mysqli_fetch_array($result);
     if ($userData) {
         if ($userData['password'] == $Password) {
-            $_SESSION['user'][] = $userData;
-            $_SESSION['userImg'] = $userData['img'];
+            $_SESSION['user'] = $userData;
             $_SESSION['isLogin'] = true;
             header('Location: ../index.php');
         }

@@ -18,3 +18,17 @@
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+<!-- check list
+    - type
+    - reservation
+    - display reservation in admin side and user sides
+-->
