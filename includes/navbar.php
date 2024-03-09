@@ -75,7 +75,7 @@
             <?php if ($_SESSION['user']['role'] === 'admin') {
               echo "
                 <a href='./manageRoom.php' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white transition-all duration-300 ease-in-out' role='menuitem' tabindex='-1' id='user-menu-item-0'>จัดการห้องพัก</a>
-                <a href='#' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white transition-all duration-300 ease-in-out' role='menuitem' tabindex='-1' id='user-menu-item-1'>แดชบอร์ด</a>
+                <a href='./dashboard.php' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white transition-all duration-300 ease-in-out' role='menuitem' tabindex='-1' id='user-menu-item-1'>แดชบอร์ด</a>
                 <a href='./profile.php' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white transition-all duration-300 ease-in-out' role='menuitem' tabindex='-1' id='user-menu-item-2'>โปรไฟล์ของฉัน</a>
                 <a href='./signOut.php?Email=$email' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white transition-all duration-300 ease-in-out' role='menuitem' tabindex='-1' id='user-menu-item-3'>ลงชื่อออก</a>
               ";} else {
@@ -95,8 +95,8 @@
   <div class="sm:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href='#' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>About</a>
-        <a href='#' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>Contact</a>
+        <a href='#' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>เกี่ยวกับ</a>
+        <a href='#' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>ติดต่อ</a>
     </div>
   </div>
 </nav>

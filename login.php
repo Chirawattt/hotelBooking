@@ -43,10 +43,6 @@
                             <a href="register.php" class="border-b border-gray-500 border-dotted">
                                 สมัครสมาชิก
                             </a>
-                            มีบัญชีอยู่แล้ว?
-                            <a href="#" class="border-b border-gray-500 border-dotted">
-                                ลืมรหัสผ่าน?
-                            </a>
                         </p>
                     </div>
                 </div>
