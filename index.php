@@ -64,6 +64,11 @@
         }
 
     }
+
+    // check if user is logged in have to redirect to login page first
+    if (!isset($_SESSION['user']) && !isset($_SESSION['isLogin'])) {
+        header('Location: login.php');
+    }
 ?>
 
 <!DOCTYPE html>

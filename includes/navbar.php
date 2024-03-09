@@ -36,8 +36,8 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4 font-normal text-base">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href='#' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>เกี่ยวกับ</a>
-            <a href='#' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>ติดต่อ</a>
+            <a href='./about.php' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>เกี่ยวกับ</a>
+            <a href='./contact.php' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>ติดต่อ</a>
           </div>
         </div>
       </div>
@@ -95,8 +95,8 @@
   <div class="sm:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href='#' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>เกี่ยวกับ</a>
-        <a href='#' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>ติดต่อ</a>
+        <a href='./about.php' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>เกี่ยวกับ</a>
+        <a href='./contact.php' class='text-gray-300 hover:bg-gray-700  rounded-md px-3 py-2 hover:text-amber-400 transition-all duration-300 ease-in-out'>ติดต่อ</a>
     </div>
   </div>
 </nav>
